@@ -6,7 +6,6 @@
 <title>Relevel — Compare Every Car with AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2338246183874683"crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -206,11 +205,20 @@
     overflow: hidden; font-size: 72px;
     border-bottom: 1px solid var(--border);
     position: relative;
+    background: linear-gradient(90deg, var(--navy-2) 25%, var(--navy-3) 50%, var(--navy-2) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
   .car-img-wrap img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 0.35s ease;
+    animation: none;
   }
+  .car-img-wrap img.loaded { animation: none; }
   .car-card:hover .car-img-wrap img { transform: scale(1.04); }
   .car-body { padding: 18px 20px 20px; }
   .car-brand {
@@ -642,8 +650,9 @@ function renderCars(filter='all', search='') {
     card.innerHTML = `
       <div class="category-badge">${car.category}</div>
       <div class="car-img-wrap">
-        <img src="${car.img}" alt="${car.brand} ${car.model}"
-          onerror="this.style.display='none';this.parentNode.innerHTML+='🚗'"
+        <img src="https://source.unsplash.com/320x180/?${encodeURIComponent(car.brand+' '+car.model+' car')}&sig=${car.id}"
+          alt="${car.brand} ${car.model}"
+          onerror="this.parentNode.innerHTML='<span style=font-size:56px>🚗</span>'"
           style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="car-body">

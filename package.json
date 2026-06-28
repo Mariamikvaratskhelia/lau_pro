@@ -1,0 +1,24 @@
+{
+  "name": "lau_pro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mariamikvaratskhelia/lau_pro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mariamikvaratskhelia/lau_pro/issues"
+  },
+  "homepage": "https://github.com/Mariamikvaratskhelia/lau_pro#readme",
+  "dependencies": {
+    "@google/genai": "^2.10.0"
+  }
+}
