@@ -205,7 +205,13 @@
     display: flex; align-items: center; justify-content: center;
     overflow: hidden; font-size: 72px;
     border-bottom: 1px solid var(--border);
+    position: relative;
   }
+  .car-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+  .car-card:hover .car-img-wrap img { transform: scale(1.04); }
   .car-body { padding: 18px 20px 20px; }
   .car-brand {
     font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
@@ -574,38 +580,38 @@
 
 <script>
 const CARS = [
-  { id:1, brand:'Toyota', model:'Camry', year:2025, price:28400, category:'sedan', hp:203, mpg:32, maintenance:'Low', emoji:'🚗', color:'Silver', engine:'2.5L 4-cyl' },
-  { id:2, brand:'Honda', model:'Accord', year:2025, price:30500, category:'sedan', hp:192, mpg:33, maintenance:'Low', emoji:'🚗', color:'Blue', engine:'1.5L Turbo' },
-  { id:3, brand:'Tesla', model:'Model 3', year:2025, price:40240, category:'electric', hp:283, mpg:358, maintenance:'Very Low', emoji:'⚡', color:'White', engine:'Electric' },
-  { id:4, brand:'Ford', model:'F-150', year:2025, price:36000, category:'truck', hp:400, mpg:24, maintenance:'Medium', emoji:'🛻', color:'Red', engine:'3.5L EcoBoost' },
-  { id:5, brand:'BMW', model:'3 Series', year:2025, price:45000, category:'luxury', hp:255, mpg:29, maintenance:'High', emoji:'💎', color:'Black', engine:'2.0L Turbo' },
-  { id:6, brand:'Toyota', model:'RAV4', year:2025, price:30000, category:'suv', hp:203, mpg:30, maintenance:'Low', emoji:'🚙', color:'White', engine:'2.5L 4-cyl' },
-  { id:7, brand:'Chevrolet', model:'Silverado', year:2025, price:38500, category:'truck', hp:355, mpg:22, maintenance:'Medium', emoji:'🛻', color:'Blue', engine:'5.3L V8' },
-  { id:8, brand:'Toyota', model:'Prius', year:2025, price:29000, category:'hybrid', hp:194, mpg:57, maintenance:'Low', emoji:'🌿', color:'Green', engine:'2.0L Hybrid' },
-  { id:9, brand:'Porsche', model:'911', year:2025, price:116000, category:'sports', hp:379, mpg:22, maintenance:'Very High', emoji:'🏎️', color:'Yellow', engine:'3.0L Twin-Turbo' },
-  { id:10, brand:'Mercedes', model:'GLE', year:2025, price:60000, category:'luxury', hp:255, mpg:24, maintenance:'High', emoji:'💎', color:'Silver', engine:'2.0L Turbo' },
-  { id:11, brand:'Ford', model:'Mustang', year:2025, price:33000, category:'sports', hp:450, mpg:18, maintenance:'Medium', emoji:'🏎️', color:'Red', engine:'5.0L V8' },
-  { id:12, brand:'Tesla', model:'Model Y', year:2025, price:44990, category:'electric', hp:384, mpg:330, maintenance:'Very Low', emoji:'⚡', color:'White', engine:'Electric' },
-  { id:13, brand:'Honda', model:'Civic', year:2025, price:24700, category:'sedan', hp:158, mpg:36, maintenance:'Low', emoji:'🚗', color:'Blue', engine:'2.0L 4-cyl' },
-  { id:14, brand:'Jeep', model:'Wrangler', year:2025, price:34000, category:'suv', hp:285, mpg:20, maintenance:'Medium', emoji:'🚙', color:'Green', engine:'3.6L V6' },
-  { id:15, brand:'Toyota', model:'Sienna', year:2025, price:38000, category:'minivan', hp:245, mpg:36, maintenance:'Low', emoji:'🚐', color:'Silver', engine:'2.5L Hybrid' },
-  { id:16, brand:'Chevrolet', model:'Equinox EV', year:2025, price:35000, category:'electric', hp:288, mpg:319, maintenance:'Low', emoji:'⚡', color:'Blue', engine:'Electric' },
-  { id:17, brand:'BMW', model:'M4', year:2025, price:76000, category:'sports', hp:503, mpg:19, maintenance:'Very High', emoji:'🏎️', color:'Black', engine:'3.0L Twin-Turbo' },
-  { id:18, brand:'Honda', model:'CR-V Hybrid', year:2025, price:33000, category:'hybrid', hp:204, mpg:40, maintenance:'Low', emoji:'🌿', color:'White', engine:'2.0L Hybrid' },
-  { id:19, brand:'Audi', model:'A4', year:2025, price:42000, category:'luxury', hp:201, mpg:28, maintenance:'High', emoji:'💎', color:'Silver', engine:'2.0L Turbo' },
-  { id:20, brand:'Ford', model:'Explorer', year:2025, price:37000, category:'suv', hp:300, mpg:24, maintenance:'Medium', emoji:'🚙', color:'Black', engine:'2.3L Turbo' },
-  { id:21, brand:'Dodge', model:'Challenger', year:2025, price:34000, category:'coupe', hp:372, mpg:17, maintenance:'Medium', emoji:'🚘', color:'Orange', engine:'3.6L V6' },
-  { id:22, brand:'Kia', model:'Telluride', year:2025, price:36000, category:'suv', hp:291, mpg:21, maintenance:'Low', emoji:'🚙', color:'White', engine:'3.8L V6' },
-  { id:23, brand:'Rivian', model:'R1T', year:2025, price:69000, category:'electric', hp:835, mpg:314, maintenance:'Low', emoji:'⚡', color:'Blue', engine:'Electric' },
-  { id:24, brand:'Subaru', model:'Outback', year:2025, price:30000, category:'suv', hp:182, mpg:29, maintenance:'Low', emoji:'🚙', color:'Green', engine:'2.5L Boxer' },
-  { id:25, brand:'Hyundai', model:'Ioniq 6', year:2025, price:39000, category:'electric', hp:320, mpg:361, maintenance:'Very Low', emoji:'⚡', color:'White', engine:'Electric' },
-  { id:26, brand:'Lamborghini', model:'Urus', year:2025, price:230000, category:'luxury', hp:666, mpg:15, maintenance:'Extreme', emoji:'💎', color:'Yellow', engine:'4.0L Twin-Turbo V8' },
-  { id:27, brand:'Mazda', model:'CX-5', year:2025, price:29000, category:'suv', hp:187, mpg:28, maintenance:'Low', emoji:'🚙', color:'Red', engine:'2.5L 4-cyl' },
-  { id:28, brand:'Volvo', model:'XC90', year:2025, price:57000, category:'luxury', hp:295, mpg:27, maintenance:'Medium', emoji:'💎', color:'Silver', engine:'2.0L Turbo' },
-  { id:29, brand:'Ferrari', model:'Roma', year:2025, price:225000, category:'sports', hp:612, mpg:13, maintenance:'Extreme', emoji:'🏎️', color:'Red', engine:'3.9L Twin-Turbo V8' },
-  { id:30, brand:'Chrysler', model:'Pacifica', year:2025, price:41000, category:'minivan', hp:287, mpg:22, maintenance:'Medium', emoji:'🚐', color:'Black', engine:'3.6L V6' },
-  { id:31, brand:'Volkswagen', model:'Golf GTI', year:2025, price:32000, category:'coupe', hp:241, mpg:30, maintenance:'Medium', emoji:'🚘', color:'Red', engine:'2.0L Turbo' },
-  { id:32, brand:'GMC', model:'Sierra EV', year:2025, price:88000, category:'electric', hp:754, mpg:400, maintenance:'Low', emoji:'⚡', color:'Black', engine:'Electric' },
+  { id:1,  brand:'Toyota',      model:'Camry',       year:2025, price:28400,  category:'sedan',   hp:203,  mpg:32,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/2024_Toyota_Camry_%28XV70%2C_facelift%2C_China%29%2C_front_8.21.22.jpg/320px-2024_Toyota_Camry_%28XV70%2C_facelift%2C_China%29%2C_front_8.21.22.jpg', engine:'2.5L 4-cyl' },
+  { id:2,  brand:'Honda',       model:'Accord',      year:2025, price:30500,  category:'sedan',   hp:192,  mpg:33,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/2023_Honda_Accord_Sport%2C_front_8.8.22.jpg/320px-2023_Honda_Accord_Sport%2C_front_8.8.22.jpg', engine:'1.5L Turbo' },
+  { id:3,  brand:'Tesla',       model:'Model 3',     year:2025, price:40240,  category:'electric', hp:283, mpg:358, maintenance:'Very Low', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/2023_Tesla_Model_3_%28facelift%2C_Highland%29%2C_front_10.28.23.jpg/320px-2023_Tesla_Model_3_%28facelift%2C_Highland%29%2C_front_10.28.23.jpg', engine:'Electric' },
+  { id:4,  brand:'Ford',        model:'F-150',       year:2025, price:36000,  category:'truck',   hp:400,  mpg:24,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/2021_Ford_F-150_%28fourteenth_generation%2C_facelift%29%2C_front_11.1.22.jpg/320px-2021_Ford_F-150_%28fourteenth_generation%2C_facelift%29%2C_front_11.1.22.jpg', engine:'3.5L EcoBoost' },
+  { id:5,  brand:'BMW',         model:'3 Series',    year:2025, price:45000,  category:'luxury',  hp:255,  mpg:29,  maintenance:'High',     img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/sixth/2023_BMW_330i_%28G20%2C_facelift%29%2C_front_9.10.22.jpg/320px-2023_BMW_330i_%28G20%2C_facelift%29%2C_front_9.10.22.jpg', engine:'2.0L Turbo' },
+  { id:6,  brand:'Toyota',      model:'RAV4',        year:2025, price:30000,  category:'suv',     hp:203,  mpg:30,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/2022_Toyota_RAV4_XLE%2C_front_11.22.21.jpg/320px-2022_Toyota_RAV4_XLE%2C_front_11.22.21.jpg', engine:'2.5L 4-cyl' },
+  { id:7,  brand:'Chevrolet',   model:'Silverado',   year:2025, price:38500,  category:'truck',   hp:355,  mpg:22,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/2022_Chevrolet_Silverado_1500_LT%2C_front_7.8.22.jpg/320px-2022_Chevrolet_Silverado_1500_LT%2C_front_7.8.22.jpg', engine:'5.3L V8' },
+  { id:8,  brand:'Toyota',      model:'Prius',       year:2025, price:29000,  category:'hybrid',  hp:194,  mpg:57,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/2023_Toyota_Prius_XLE_AWD-e%2C_front_3.19.23.jpg/320px-2023_Toyota_Prius_XLE_AWD-e%2C_front_3.19.23.jpg', engine:'2.0L Hybrid' },
+  { id:9,  brand:'Porsche',     model:'911',         year:2025, price:116000, category:'sports',  hp:379,  mpg:22,  maintenance:'Very High', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/2020_Porsche_911_Carrera_4S_%28992%29%2C_front_8.1.20.jpg/320px-2020_Porsche_911_Carrera_4S_%28992%29%2C_front_8.1.20.jpg', engine:'3.0L Twin-Turbo' },
+  { id:10, brand:'Mercedes',    model:'GLE',         year:2025, price:60000,  category:'luxury',  hp:255,  mpg:24,  maintenance:'High',     img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/2020_Mercedes-Benz_GLE_450_4MATIC%2C_front_10.24.19.jpg/320px-2020_Mercedes-Benz_GLE_450_4MATIC%2C_front_10.24.19.jpg', engine:'2.0L Turbo' },
+  { id:11, brand:'Ford',        model:'Mustang',     year:2025, price:33000,  category:'sports',  hp:450,  mpg:18,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/2024_Ford_Mustang_GT%2C_front_9.10.23.jpg/320px-2024_Ford_Mustang_GT%2C_front_9.10.23.jpg', engine:'5.0L V8' },
+  { id:12, brand:'Tesla',       model:'Model Y',     year:2025, price:44990,  category:'electric', hp:384, mpg:330, maintenance:'Very Low', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/2022_Tesla_Model_Y_Long_Range_AWD%2C_front_11.8.22.jpg/320px-2022_Tesla_Model_Y_Long_Range_AWD%2C_front_11.8.22.jpg', engine:'Electric' },
+  { id:13, brand:'Honda',       model:'Civic',       year:2025, price:24700,  category:'sedan',   hp:158,  mpg:36,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/2022_Honda_Civic_EX%2C_front_11.3.21.jpg/320px-2022_Honda_Civic_EX%2C_front_11.3.21.jpg', engine:'2.0L 4-cyl' },
+  { id:14, brand:'Jeep',        model:'Wrangler',    year:2025, price:34000,  category:'suv',     hp:285,  mpg:20,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/2021_Jeep_Wrangler_Unlimited_Sport_S%2C_front_10.26.20.jpg/320px-2021_Jeep_Wrangler_Unlimited_Sport_S%2C_front_10.26.20.jpg', engine:'3.6L V6' },
+  { id:15, brand:'Toyota',      model:'Sienna',      year:2025, price:38000,  category:'minivan', hp:245,  mpg:36,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/2021_Toyota_Sienna_XSE%2C_front_12.14.20.jpg/320px-2021_Toyota_Sienna_XSE%2C_front_12.14.20.jpg', engine:'2.5L Hybrid' },
+  { id:16, brand:'Chevrolet',   model:'Equinox EV',  year:2025, price:35000,  category:'electric', hp:288, mpg:319, maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/2024_Chevrolet_Equinox_EV_2LT%2C_front_10.14.23.jpg/320px-2024_Chevrolet_Equinox_EV_2LT%2C_front_10.14.23.jpg', engine:'Electric' },
+  { id:17, brand:'BMW',         model:'M4',          year:2025, price:76000,  category:'sports',  hp:503,  mpg:19,  maintenance:'Very High', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/2021_BMW_M4_Competition_%28G82%29%2C_front_8.21.21.jpg/320px-2021_BMW_M4_Competition_%28G82%29%2C_front_8.21.21.jpg', engine:'3.0L Twin-Turbo' },
+  { id:18, brand:'Honda',       model:'CR-V Hybrid', year:2025, price:33000,  category:'hybrid',  hp:204,  mpg:40,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/2023_Honda_CR-V_Sport_Hybrid%2C_front_12.27.22.jpg/320px-2023_Honda_CR-V_Sport_Hybrid%2C_front_12.27.22.jpg', engine:'2.0L Hybrid' },
+  { id:19, brand:'Audi',        model:'A4',          year:2025, price:42000,  category:'luxury',  hp:201,  mpg:28,  maintenance:'High',     img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/2020_Audi_A4_Premium_40_TFSI%2C_front_1.7.20.jpg/320px-2020_Audi_A4_Premium_40_TFSI%2C_front_1.7.20.jpg', engine:'2.0L Turbo' },
+  { id:20, brand:'Ford',        model:'Explorer',    year:2025, price:37000,  category:'suv',     hp:300,  mpg:24,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/2020_Ford_Explorer_XLT%2C_front_10.21.19.jpg/320px-2020_Ford_Explorer_XLT%2C_front_10.21.19.jpg', engine:'2.3L Turbo' },
+  { id:21, brand:'Dodge',       model:'Challenger',  year:2025, price:34000,  category:'coupe',   hp:372,  mpg:17,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/2019_Dodge_Challenger_GT%2C_front_10.24.19.jpg/320px-2019_Dodge_Challenger_GT%2C_front_10.24.19.jpg', engine:'3.6L V6' },
+  { id:22, brand:'Kia',         model:'Telluride',   year:2025, price:36000,  category:'suv',     hp:291,  mpg:21,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/2020_Kia_Telluride_EX%2C_front_11.2.19.jpg/320px-2020_Kia_Telluride_EX%2C_front_11.2.19.jpg', engine:'3.8L V6' },
+  { id:23, brand:'Rivian',      model:'R1T',         year:2025, price:69000,  category:'electric', hp:835, mpg:314, maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Rivian_R1T_at_Petersen_Automotive_Museum_%28cropped%29.jpg/320px-Rivian_R1T_at_Petersen_Automotive_Museum_%28cropped%29.jpg', engine:'Electric' },
+  { id:24, brand:'Subaru',      model:'Outback',     year:2025, price:30000,  category:'suv',     hp:182,  mpg:29,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/2022_Subaru_Outback_Wilderness%2C_front_9.20.21.jpg/320px-2022_Subaru_Outback_Wilderness%2C_front_9.20.21.jpg', engine:'2.5L Boxer' },
+  { id:25, brand:'Hyundai',     model:'Ioniq 6',     year:2025, price:39000,  category:'electric', hp:320, mpg:361, maintenance:'Very Low', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/2023_Hyundai_IONIQ_6_SE_Standard_Range_RWD%2C_front_3.19.23.jpg/320px-2023_Hyundai_IONIQ_6_SE_Standard_Range_RWD%2C_front_3.19.23.jpg', engine:'Electric' },
+  { id:26, brand:'Lamborghini', model:'Urus',        year:2025, price:230000, category:'luxury',  hp:666,  mpg:15,  maintenance:'Extreme',  img:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Lamborghini_Urus_silver_trimmed.jpg/320px-Lamborghini_Urus_silver_trimmed.jpg', engine:'4.0L Twin-Turbo V8' },
+  { id:27, brand:'Mazda',       model:'CX-5',        year:2025, price:29000,  category:'suv',     hp:187,  mpg:28,  maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/2022_Mazda_CX-5_2.5_S_Carbon_Edition%2C_front_3.19.22.jpg/320px-2022_Mazda_CX-5_2.5_S_Carbon_Edition%2C_front_3.19.22.jpg', engine:'2.5L 4-cyl' },
+  { id:28, brand:'Volvo',       model:'XC90',        year:2025, price:57000,  category:'luxury',  hp:295,  mpg:27,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/2020_Volvo_XC90_T6_Momentum%2C_front_1.7.20.jpg/320px-2020_Volvo_XC90_T6_Momentum%2C_front_1.7.20.jpg', engine:'2.0L Turbo' },
+  { id:29, brand:'Ferrari',     model:'Roma',        year:2025, price:225000, category:'sports',  hp:612,  mpg:13,  maintenance:'Extreme',  img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Ferrari_Roma_trimmed.jpg/320px-Ferrari_Roma_trimmed.jpg', engine:'3.9L Twin-Turbo V8' },
+  { id:30, brand:'Chrysler',    model:'Pacifica',    year:2025, price:41000,  category:'minivan', hp:287,  mpg:22,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/2021_Chrysler_Pacifica_Touring_L%2C_front_10.26.20.jpg/320px-2021_Chrysler_Pacifica_Touring_L%2C_front_10.26.20.jpg', engine:'3.6L V6' },
+  { id:31, brand:'Volkswagen',  model:'Golf GTI',    year:2025, price:32000,  category:'coupe',   hp:241,  mpg:30,  maintenance:'Medium',   img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/2022_Volkswagen_Golf_GTI_%28Mk8%29%2C_front_8.7.22.jpg/320px-2022_Volkswagen_Golf_GTI_%28Mk8%29%2C_front_8.7.22.jpg', engine:'2.0L Turbo' },
+  { id:32, brand:'GMC',         model:'Sierra EV',   year:2025, price:88000,  category:'electric', hp:754, mpg:400, maintenance:'Low',      img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/2024_GMC_Sierra_EV_Denali_Edition_1%2C_front_10.14.23.jpg/320px-2024_GMC_Sierra_EV_Denali_Edition_1%2C_front_10.14.23.jpg', engine:'Electric' },
 ];
 
 let selectedCars = [];
@@ -635,7 +641,11 @@ function renderCars(filter='all', search='') {
     card.id = 'car-card-' + car.id;
     card.innerHTML = `
       <div class="category-badge">${car.category}</div>
-      <div class="car-img-wrap">${car.emoji}</div>
+      <div class="car-img-wrap">
+        <img src="${car.img}" alt="${car.brand} ${car.model}"
+          onerror="this.style.display='none';this.parentNode.innerHTML+='🚗'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
       <div class="car-body">
         <div class="car-brand">${car.brand} · ${car.year}</div>
         <div class="car-name">${car.model}</div>
